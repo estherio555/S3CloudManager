@@ -1,11 +1,14 @@
 # This is a sample Python script.
-
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-from dotenv import load_dotenv
+# Print environment variables
+import os
+print(os.environ)
 
-load_dotenv
+#Add new environment variables from .env
+from dotenv import load_dotenv
+load_dotenv()
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
