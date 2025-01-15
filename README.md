@@ -29,6 +29,8 @@ This is a Python project that demonstrates how to interact with AWS S3 using `bo
    cd S3CloudManager
    pip install -r requirements.txt
 
+## Author
+<www.linkedin.com>
 
 <div class="alert alert-block alert-success">
 <b>Up to you:</b> Use green boxes sparingly, and only for some specific 
