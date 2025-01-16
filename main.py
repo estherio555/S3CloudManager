@@ -22,7 +22,7 @@ AWS_REGION = os.getenv("REGION")
 s3 = boto3.client('s3')
 
 # List objects in a specific S3 bucket
-bucket_name = 'your-bucket-name'
+bucket_name = 'Esther-EZ2024'
 response = s3.list_objects_v2(Bucket=bucket_name)
 
 def print_hi(name):

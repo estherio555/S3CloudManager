@@ -59,3 +59,23 @@ def upload_file(file_path: str, bucket_name: str, object_name: str = None) -> Un
     except Exception as e:
         return f"Error uploading file: {str(e)}"
 
+
+def download_file(bucket_name, object_name, file_path):
+    """
+    Download a file from an S3 bucket.
+
+    :param bucket_name: The S3 bucket name
+    :param object_name: The name of the file in the bucket
+    :param file_path: Local path to save the file
+    :return: True if the file was downloaded, else False
+    """
+    s3_client = get_client("s3")
+
+    try:
+        s3_client.download_file(bucket_name, object_name, file_path)
+        print(f"File downloaded successfully from {bucket_name}/{object_name} to {file_path}")
+        return True
+    except Exception as e:
+        print(f"Error downloading file: {str(e)}")
+    return False
+
