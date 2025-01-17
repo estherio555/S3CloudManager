@@ -159,3 +159,25 @@ def delete_bucket(bucket_name):
     except Exception as e:
         print(f"Error deleting bucket: {str(e)}")
     return False
+
+
+def get_object_metadata(bucket_name, object_name):
+    """
+    Get metadata for an object in S3.
+
+    :param bucket_name: The S3 bucket name
+    :param object_name: The object in the bucket
+    :return: Metadata dictionary or None if error occurred
+    """
+    s3_client = get_client("s3")
+
+    try:
+        response = s3_client.head_object(Bucket=bucket_name, Key=object_name)
+        print(f"Metadata for {object_name}: {response}")
+        return response
+    except Exception as e:
+        print(f"Error getting metadata: {str(e)}")
+    return None
+
+
+
