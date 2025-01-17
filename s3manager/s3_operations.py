@@ -113,3 +113,49 @@ def delete_file(bucket_name, object_name):
     except Exception as e:
         print(f"Error deleting file: {str(e)}")
     return False
+
+
+def create_bucket(bucket_name):
+    """
+    Create a new S3 bucket.
+
+    :param bucket_name: The name of the bucket to create
+    :return: True if the bucket was created, else False
+    """
+    s3_client = get_client("s3")
+
+    list_of_buckets = s3_client.list_buckets().get("Buckets")
+
+    if bucket_name in [bucket.get("Name") for bucket in list_of_buckets]:
+
+        name = str(datetime.now()).split()[0]
+        name = "".join(name.split("-"))
+        bucket_name = f"{bucket_name}{name}"
+
+    print(bucket_name)
+
+    try:
+        s3_client.create_bucket(Bucket=bucket_name)
+        print(f"Bucket {bucket_name} created successfully.")
+        return True
+    except Exception as e:
+        print(f"Error creating bucket: {str(e)}")
+    return False
+
+
+def delete_bucket(bucket_name):
+    """
+    Delete an S3 bucket.
+
+    :param bucket_name: The S3 bucket name
+    :return: True if the bucket was deleted, else False
+    """
+    s3_client = get_client("s3")
+
+    try:
+        s3_client.delete_bucket(Bucket=bucket_name)
+        print(f"Bucket {bucket_name} deleted successfully.")
+        return True
+    except Exception as e:
+        print(f"Error deleting bucket: {str(e)}")
+    return False
