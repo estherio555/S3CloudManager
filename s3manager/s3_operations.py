@@ -79,3 +79,37 @@ def download_file(bucket_name, object_name, file_path):
         print(f"Error downloading file: {str(e)}")
     return False
 
+def list_files(bucket_name):
+    """
+    List all files in an S3 bucket.
+
+    :param bucket_name: The S3 bucket name
+    :return: List of files in the bucket
+    """
+    s3_client = get_client("s3")
+
+    try:
+        response = s3_client.list_objects_v2(Bucket=bucket_name)
+        files = [obj['Key'] for obj in response.get('Contents', [])]
+        return files
+    except Exception as e:
+        print(f"Error listing files: {str(e)}")
+    return []
+
+def delete_file(bucket_name, object_name):
+    """
+    Delete a file from an S3 bucket.
+
+    :param bucket_name: The S3 bucket name
+    :param object_name: The file to delete
+    :return: True if the file was deleted, else False
+    """
+    s3_client = get_client("s3")
+
+    try:
+        s3_client.delete_object(Bucket=bucket_name, Key=object_name)
+        print(f"File {object_name} deleted from {bucket_name}")
+        return True
+    except Exception as e:
+        print(f"Error deleting file: {str(e)}")
+    return False
