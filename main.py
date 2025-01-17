@@ -2,36 +2,15 @@
 #################################################
 # Created: Esther Ezekiel
 
-# Print environment variables
-import os
-print(os.environ['AWS_SECRET_ACCESS_KEY'])
+from s3manager.s3_operations import *
 
-import boto3
+from s3manager.s3_operations import download_file
 
-#Add new environment variables from .env
-from dotenv import load_dotenv
-load_dotenv()
+create_bucket("esther2026")
 
-AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_REGION = os.getenv("REGION")
+upload_file("/Users/john_eze4u/Downloads/Loss.png", "esther2024")
 
-# print(AWS_REGION)
+delete_bucket("Esther2026")
 
-# Create an S3 client
-s3 = boto3.client('s3')
+upload_file(file_path="Loss.png", bucket_name="esther2026", object_name="projects/dev/esther2026.png")
 
-# List objects in a specific S3 bucket
-bucket_name = 'Esther-EZ2024'
-response = s3.list_objects_v2(Bucket=bucket_name)
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
